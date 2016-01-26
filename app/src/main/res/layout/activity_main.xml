@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:unic="http://schemas.android.com/apk/res/unic.props"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <unic.props.BubbleImageView
+        android:id="@+id/bubble_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        unic:heline_length="27dp"
+        unic:max_dimen="300dp"
+        unic:min_dimen="100dp"
+        unic:orientation="left"
+        unic:radius="5dp"
+        unic:vertex_x_dis="20dp"
+        unic:vertex_y_dis="50dp" />
+</RelativeLayout>

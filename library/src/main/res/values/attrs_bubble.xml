@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BubbleImageAttr">
+        <!-- 圆角弧度 -->
+        <attr name="radius" format="dimension" />
+        <!-- 三角方向 -->
+        <attr name="orientation">
+            <enum name="right" value="0" />
+            <enum name="left" value="1" />
+        </attr>
+        <!-- 三角X方向投影 -->
+        <attr name="vertex_x_dis" format="dimension" />
+        <!-- 三角Y方向投影 -->
+        <attr name="vertex_y_dis" format="dimension" />
+        <!-- 三角底边长度 -->
+        <attr name="heline_length" format="dimension" />
+        <!-- 图片最长边 -->
+        <attr name="max_dimen" format="dimension" />
+        <!-- 图片最短边 -->
+        <attr name="min_dimen" format="dimension" />
+    </declare-styleable>
+</resources>
