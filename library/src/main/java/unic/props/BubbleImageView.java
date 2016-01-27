@@ -102,9 +102,10 @@ public class BubbleImageView extends ImageView {
 
     @Override
     public void setImageBitmap(Bitmap bm) {
+        super.setImageBitmap(null);
         mSrcBitmap = makeBubbleBitmap(bm);
-        super.setImageBitmap(mSrcBitmap);
 //        recycleBitmap(bm);
+        super.setImageBitmap(mSrcBitmap);
     }
 
     @Override
@@ -159,20 +160,22 @@ public class BubbleImageView extends ImageView {
 
         mSrcBitmap = makeBubbleBitmap(original);
         Drawable drawable = new BitmapDrawable(getResources(), mSrcBitmap);
-        super.setImageDrawable(drawable);
+        super.setImageDrawable(null);
 //        recycleBitmap(original);
+        super.setImageDrawable(drawable);
     }
 
 
     /**
      * Get the proper showing size of this picture.
      *
-     * @param targetWidth
-     * @param targetHeight
+     * @param w
+     * @param h
      * @return int[0] is width, int[1] is height.
      */
-    private int[] getProperSize(int targetWidth, int targetHeight) {
-
+    private int[] getProperSize(int w, int h) {
+        int targetWidth = w;
+        int targetHeight = h;
         if (targetWidth > targetHeight) {
             if (targetWidth > mMaxDimension) {
                 int temp = targetWidth;
@@ -193,6 +196,11 @@ public class BubbleImageView extends ImageView {
                 targetHeight = (int) mMinDimension;
                 targetWidth = targetWidth * targetHeight / temp;
             }
+        }
+
+
+        if (w == targetWidth && h == targetHeight) {
+            targetHeight = h - 1;
         }
 
         return new int[]{targetWidth, targetHeight};
@@ -232,7 +240,9 @@ public class BubbleImageView extends ImageView {
      * Release the image bitmap.
      */
     public void release() {
+        super.setImageBitmap(null);
         recycleBitmap(mSrcBitmap);
+        System.gc();
     }
 
 
@@ -245,18 +255,19 @@ public class BubbleImageView extends ImageView {
         if (null != recycle && !recycle.isRecycled()) {
             recycle.recycle();
             recycle = null;
+            System.gc();
         }
     }
 
     private Bitmap makeBubbleBitmap(Bitmap original, int width, int height) {
 
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(original, width, height, false);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(original, width, height, true);
+
         Bitmap dest = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(dest);
         canvas.clipPath(mPath); // clip the image.
         canvas.drawBitmap(scaledBitmap, 0, 0, mPaint);
         recycleBitmap(scaledBitmap);
-
         return dest;
 
     }

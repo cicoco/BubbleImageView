@@ -6,12 +6,13 @@ import android.os.Bundle;
 import unic.props.BubbleImageView;
 
 public class MainActivity extends Activity {
+    private BubbleImageView img = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BubbleImageView img = (BubbleImageView) findViewById(R.id.bubble_img);
+        img = (BubbleImageView) findViewById(R.id.bubble_img);
         img.setImageResource(R.mipmap.test);
 
 
@@ -19,6 +20,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        img.release();
         super.onDestroy();
 
     }
